@@ -21,11 +21,16 @@ public class Tablero {
     }
 
     public static void inicializarTablero(char[][] tablero) {
+        Random rand = new Random();
+        int filaSalida = rand.nextInt(tablero.length);
+        int columnaSalida = rand.nextInt(tablero[0].length);
+
         for (int i = 0; i < tablero.length; i++) {
             for (int j = 0; j < tablero[i].length; j++) {
                 tablero[i][j] = 'L'; // 'L' representa una casilla libre
             }
         }
+        tablero[filaSalida][columnaSalida] = 'S';
     }
 
     public static void mostrarTablero(char[][] tablero) {
@@ -54,3 +59,4 @@ public class Tablero {
         }
     }
 }
+
