@@ -1,3 +1,4 @@
+import java.util.Random;
 public class Tablero {
     public static void main(String[] args) {
         char[][] tableroJugador1 = new char[6][6];
@@ -6,6 +7,10 @@ public class Tablero {
         // Inicializar tableros
         inicializarTablero(tableroJugador1);
         inicializarTablero(tableroJugador2);
+
+        // Agregar Enemigos
+        agregarEnemigos(tableroJugador1, 8);
+        agregarEnemigos(tableroJugador2, 8);
 
         // Mostrar tableros
         System.out.println("Tablero del Jugador 1:");
@@ -31,6 +36,21 @@ public class Tablero {
                 System.out.print(tablero[i][j] + " ");
             }
             System.out.println();
+        }
+    }
+
+    public static void agregarEnemigos(char [][] tablero, int cantidad){
+        Random rand = new Random();
+        int enemigosAgregados = 0;
+
+        while (enemigosAgregados < cantidad){
+            int fila = rand.nextInt(tablero.length);
+            int columna = rand.nextInt(tablero[0].length);
+
+            if (tablero[fila][columna] == 'L') {
+                tablero[fila][columna] = 'E';
+                enemigosAgregados++;
+            }
         }
     }
 }
