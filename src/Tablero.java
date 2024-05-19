@@ -12,6 +12,10 @@ public class Tablero {
         agregarEnemigos(tableroJugador1, 8);
         agregarEnemigos(tableroJugador2, 8);
 
+        //Mostrar Usuario
+        agregarUsuario(tableroJugador1, 'A');
+        agregarUsuario(tableroJugador2, 'B');
+
         // Mostrar tableros
         System.out.println("Tablero del Jugador 1:");
         mostrarTablero(tableroJugador1);
@@ -55,6 +59,20 @@ public class Tablero {
             if (tablero[fila][columna] == 'L') {
                 tablero[fila][columna] = 'E';
                 enemigosAgregados++;
+            }
+        }
+    }
+    public static void agregarUsuario(char [][] tablero, char usuario){
+        Random rand  = new Random();
+        boolean colocado = false;
+
+        while (!colocado){
+            int fila = rand.nextInt(tablero.length);
+            int columna = rand.nextInt(tablero[0].length);
+
+            if (tablero[fila][columna] == 'L'){
+                tablero[fila][columna] = usuario;
+                colocado = true;
             }
         }
     }
