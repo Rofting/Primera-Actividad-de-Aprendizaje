@@ -76,4 +76,3 @@ public class Tablero {
         return posicion;
     }
 }
-
