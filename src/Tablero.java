@@ -1,29 +1,6 @@
 import java.util.Random;
+
 public class Tablero {
-    public static void main(String[] args) {
-        char[][] tableroJugador1 = new char[6][6];
-        char[][] tableroJugador2 = new char[6][6];
-
-        // Inicializar tableros
-        inicializarTablero(tableroJugador1);
-        inicializarTablero(tableroJugador2);
-
-        // Agregar Enemigos
-        agregarEnemigos(tableroJugador1, 8);
-        agregarEnemigos(tableroJugador2, 8);
-
-        //Mostrar Usuario
-        agregarUsuario(tableroJugador1, 'A');
-        agregarUsuario(tableroJugador2, 'B');
-
-        // Mostrar tableros
-        System.out.println("Tablero del Jugador 1:");
-        mostrarTablero(tableroJugador1, false);
-
-        System.out.println("\nTablero del Jugador 2:");
-        mostrarTablero(tableroJugador2, false);
-    }
-
     public static void inicializarTablero(char[][] tablero) {
         Random rand = new Random();
         int filaSalida = rand.nextInt(tablero.length);
@@ -52,11 +29,11 @@ public class Tablero {
         }
     }
 
-    public static void agregarEnemigos(char [][] tablero, int cantidad){
+    public static void agregarEnemigos(char[][] tablero, int cantidad) {
         Random rand = new Random();
         int enemigosAgregados = 0;
 
-        while (enemigosAgregados < cantidad){
+        while (enemigosAgregados < cantidad) {
             int fila = rand.nextInt(tablero.length);
             int columna = rand.nextInt(tablero[0].length);
 
@@ -66,19 +43,37 @@ public class Tablero {
             }
         }
     }
-    public static void agregarUsuario(char [][] tablero, char usuario){
-        Random rand  = new Random();
+
+    public static void agregarUsuario(char[][] tablero, char usuario) {
+        Random rand = new Random();
         boolean colocado = false;
 
-        while (!colocado){
+        while (!colocado) {
             int fila = rand.nextInt(tablero.length);
             int columna = rand.nextInt(tablero[0].length);
 
-            if (tablero[fila][columna] == 'L'){
+            if (tablero[fila][columna] == 'L') {
                 tablero[fila][columna] = usuario;
                 colocado = true;
             }
         }
+    }
+
+    public static int[] encontrarJugador(char[][] tablero, char jugador) {
+        int[] posicion = new int[2];
+
+        for (int i = 0; i < tablero.length; i++) {
+            for (int j = 0; j < tablero[i].length; j++) {
+                if (tablero[i][j] == jugador) {
+                    posicion[0] = i; // fila
+                    posicion[1] = j; // columna
+                    return posicion;
+                }
+            }
+        }
+        posicion[0] = -1;
+        posicion[1] = -1;
+        return posicion;
     }
 }
 
