@@ -75,4 +75,20 @@ public class Tablero {
         posicion[1] = -1;
         return posicion;
     }
+
+    public static void agregarVidasExtra(char[][] tablero, int cantidad) {
+        Random rand = new Random();
+        int vidasAgregadas = 0;
+
+        while (vidasAgregadas < cantidad) {
+            int fila = rand.nextInt(tablero.length);
+            int columna = rand.nextInt(tablero[0].length);
+
+            if (tablero[fila][columna] == 'L') {
+                tablero[fila][columna] = 'V';
+                vidasAgregadas++;
+            }
+        }
+    }
 }
+

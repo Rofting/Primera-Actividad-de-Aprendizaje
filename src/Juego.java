@@ -10,9 +10,23 @@ public class Juego {
         Scanner scanner = new Scanner(System.in);
 
         // Configuración inicial
-        System.out.print("¿Deseas que los movimientos sean circulares? (S/N): ");
-        char respuesta = scanner.next().charAt(0);
-        juego.movimientoCircular = (respuesta == 'S' || respuesta == 's');
+        boolean movimientoCircularValido = false;
+        char respuesta;
+
+        while (!movimientoCircularValido) {
+            System.out.print("¿Deseas que los movimientos sean circulares? (S/N): ");
+            respuesta = scanner.next().charAt(0);
+
+            if (respuesta == 'S' || respuesta == 's') {
+                juego.movimientoCircular = true;
+                movimientoCircularValido = true;
+            } else if (respuesta == 'N' || respuesta == 'n') {
+                juego.movimientoCircular = false;
+                movimientoCircularValido = true;
+            } else {
+                System.out.println("Entrada no válida. Ingresa 'S' o 'N'.");
+            }
+        }
 
         char[][] tableroJugador1 = new char[6][6];
         char[][] tableroJugador2 = new char[6][6];
@@ -68,7 +82,8 @@ public class Juego {
         // Solicitar movimiento al usuario
         System.out.print("Ingresa tu movimiento (número de casillas dirección): ");
         int cantidadCasillas = scanner.nextInt();
-        char direccion = scanner.next().charAt(0);
+        String direccionStr = scanner.next().toUpperCase();
+        char direccion = direccionStr.charAt(0);
 
         int nuevaFila = filaActual;
         int nuevaColumna = columnaActual;
@@ -123,6 +138,18 @@ public class Juego {
             }
         }
 
+        // Verificar si el jugador llego a la salida
+        if (tablero[nuevaFila][nuevaColumna] == 'S') {
+            if (jugador == 'A') {
+                System.out.println("¡Jugador A ha llegado a la salida! Fin del juego");
+                return true;
+            }
+            else {
+                System.out.println("¡Jugador B ha llegado a la salida! Fin del juego");
+                return true;
+            }
+        }
+
         // Mover jugador y dejar la casilla libre
         tablero[filaActual][columnaActual] = 'L';
         tablero[nuevaFila][nuevaColumna] = jugador;
@@ -131,6 +158,7 @@ public class Juego {
             System.out.println("¡El jugador " + jugador + " ha perdido todas sus vidas! Fin del juego.");
             return true;
         }
+
 
         // Mostrar tablero tras el movimiento
         System.out.println("Estado de tu tablero tras el movimiento:");
