@@ -16,7 +16,33 @@ public class Juego {
         char[][] tableroJugador1 = new char[tamanoTablero][tamanoTablero];
         char[][] tableroJugador2 = new char[tamanoTablero][tamanoTablero];
 
-        // Configuración inicial
+        // Configuración inicial de dificultad
+        int nivelDificultad = 0;
+        while (nivelDificultad < 1 || nivelDificultad > 3) {
+            System.out.print("Selecciona la dificultad (1 = Fácil, 2 = Medio, 3 = Difícil): ");
+            nivelDificultad = scanner.nextInt();
+            if (nivelDificultad < 1 || nivelDificultad > 3) {
+                System.out.println("Entrada no válida. Ingresa 1, 2 o 3.");
+            }
+        }
+
+        // Determinar cantidad de enemigos según la dificultad
+        int cantidadEnemigos;
+        switch (nivelDificultad) {
+            case 1:
+                cantidadEnemigos = 5;
+                break;
+            case 2:
+                cantidadEnemigos = 8;
+                break;
+            case 3:
+                cantidadEnemigos = 12;
+                break;
+            default:
+                cantidadEnemigos = 8;
+        }
+
+        // Configuración inicial de movimiento circular
         boolean movimientoCircularValido = false;
         char respuesta;
 
@@ -40,8 +66,8 @@ public class Juego {
         Tablero.inicializarTablero(tableroJugador2);
 
         // Agregar Enemigos
-        Tablero.agregarEnemigos(tableroJugador1, 8);
-        Tablero.agregarEnemigos(tableroJugador2, 8);
+        Tablero.agregarEnemigos(tableroJugador1, cantidadEnemigos);
+        Tablero.agregarEnemigos(tableroJugador2, cantidadEnemigos);
 
         // Agregar Vidas Extra
         Tablero.agregarVidasExtra(tableroJugador1, 2);
