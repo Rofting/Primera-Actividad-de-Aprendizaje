@@ -39,6 +39,10 @@ public class Juego {
         Tablero.agregarEnemigos(tableroJugador1, 8);
         Tablero.agregarEnemigos(tableroJugador2, 8);
 
+        // Agregar Vidas Extra
+        Tablero.agregarVidasExtra(tableroJugador1, 2);
+        Tablero.agregarVidasExtra(tableroJugador2, 2);
+
         // Agregar Usuarios
         Tablero.agregarUsuario(tableroJugador1, 'A');
         Tablero.agregarUsuario(tableroJugador2, 'B');
@@ -138,13 +142,23 @@ public class Juego {
             }
         }
 
+        // Chequear si hay una vida extra en la nueva posición
+        if (tablero[nuevaFila][nuevaColumna] == 'V') {
+            if (jugador == 'A') {
+                vidasJugador1++;
+                System.out.println("¡Jugador A ha encontrado una vida extra! Vidas actuales: " + vidasJugador1);
+            } else {
+                vidasJugador2++;
+                System.out.println("¡Jugador B ha encontrado una vida extra! Vidas actuales: " + vidasJugador2);
+            }
+        }
+
         // Verificar si el jugador llego a la salida
         if (tablero[nuevaFila][nuevaColumna] == 'S') {
             if (jugador == 'A') {
                 System.out.println("¡Jugador A ha llegado a la salida! Fin del juego");
                 return true;
-            }
-            else {
+            } else {
                 System.out.println("¡Jugador B ha llegado a la salida! Fin del juego");
                 return true;
             }
@@ -158,7 +172,6 @@ public class Juego {
             System.out.println("¡El jugador " + jugador + " ha perdido todas sus vidas! Fin del juego.");
             return true;
         }
-
 
         // Mostrar tablero tras el movimiento
         System.out.println("Estado de tu tablero tras el movimiento:");
