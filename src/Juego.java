@@ -9,6 +9,13 @@ public class Juego {
         Juego juego = new Juego();
         Scanner scanner = new Scanner(System.in);
 
+        // Solicitar el tamaño del tablero al inicio
+        System.out.print("Ingresa el tamaño del tablero (por ejemplo, 6 para un tablero 6x6): ");
+        int tamanoTablero = scanner.nextInt();
+
+        char[][] tableroJugador1 = new char[tamanoTablero][tamanoTablero];
+        char[][] tableroJugador2 = new char[tamanoTablero][tamanoTablero];
+
         // Configuración inicial
         boolean movimientoCircularValido = false;
         char respuesta;
@@ -27,9 +34,6 @@ public class Juego {
                 System.out.println("Entrada no válida. Ingresa 'S' o 'N'.");
             }
         }
-
-        char[][] tableroJugador1 = new char[6][6];
-        char[][] tableroJugador2 = new char[6][6];
 
         // Inicializar tableros
         Tablero.inicializarTablero(tableroJugador1);
@@ -180,3 +184,4 @@ public class Juego {
         return false;
     }
 }
+
