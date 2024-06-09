@@ -1,4 +1,6 @@
 import java.util.Random;
+import static com.diogonunes.jcolor.Ansi.colorize;
+import static com.diogonunes.jcolor.Attribute.*;
 
 public class Tablero {
     private static Colors colors = new Colors();
@@ -17,8 +19,15 @@ public class Tablero {
     }
 
     public static void mostrarTablero(char[][] tablero, boolean mostrarEnemigos) {
-        System.out.println("  1 2 3 4 5 6");
+        // Generar encabezado de columnas dinámico
+        System.out.print("  ");
+        for (int i = 1; i <= tablero[0].length; i++) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+
         for (int i = 0; i < tablero.length; i++) {
+            // Mostrar número de fila
             System.out.print((i + 1) + " ");
             for (int j = 0; j < tablero[i].length; j++) {
                 char elemento = tablero[i][j];
