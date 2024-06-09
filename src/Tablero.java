@@ -1,6 +1,8 @@
 import java.util.Random;
 
 public class Tablero {
+    private static Colors colors = new Colors();
+
     public static void inicializarTablero(char[][] tablero) {
         Random rand = new Random();
         int filaSalida = rand.nextInt(tablero.length);
@@ -19,11 +21,33 @@ public class Tablero {
         for (int i = 0; i < tablero.length; i++) {
             System.out.print((i + 1) + " ");
             for (int j = 0; j < tablero[i].length; j++) {
-                if (tablero[i][j] == 'E' && !mostrarEnemigos) {
-                    System.out.print("L ");
-                } else {
-                    System.out.print(tablero[i][j] + " ");
+                char elemento = tablero[i][j];
+                String elementoColorizado = "";
+
+                switch (elemento) {
+                    case 'E':
+                        if (mostrarEnemigos) {
+                            elementoColorizado = colors.colored_text("E", 1);
+                        } else {
+                            elementoColorizado = colors.colored_text("L", 0);
+                        }
+                        break;
+                    case 'V':
+                        elementoColorizado = colors.colored_text("V", 2);
+                        break;
+                    case 'A':
+                    case 'B':
+                        elementoColorizado = colors.colored_text(Character.toString(elemento), 1);
+                        break;
+                    case 'S':
+                        elementoColorizado = colors.colored_text("S", 4);
+                        break;
+                    default:
+                        elementoColorizado = Character.toString(elemento);
+                        break;
                 }
+
+                System.out.print(elementoColorizado + " ");
             }
             System.out.println();
         }
@@ -91,4 +115,3 @@ public class Tablero {
         }
     }
 }
-
